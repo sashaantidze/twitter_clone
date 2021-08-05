@@ -1,5 +1,6 @@
 <template>
-    <form class="flex">
+    <form class="flex" @submit.prevent="submit">
+        
     	<div class="mr-3">
 
     		<img :src="$user.avatar" class="w-12 rounded-full" alt="">
@@ -7,7 +8,7 @@
     	</div>
 
     	<div class="flex-grow">
-    		<textarea class="bg-gray-900 w-full outline-none text-gray-300 text-lg resize-none mb-2" placeholder="What's cracking, my dude?" autofocus=""></textarea>
+    		<textarea class="bg-gray-900 w-full outline-none text-gray-300 text-lg resize-none mb-2" placeholder="What's cracking, my dude?" autofocus v-model="form.body"></textarea>
 
     		<div class="flex justify-between">
     			<div>
@@ -17,21 +18,30 @@
     			<div>
     				<button type="submit" class="bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none">Tweet</button>
     			</div>
+
     		</div>
 
     	</div>
     </form>
 </template>
 
-<script>
 
+<script>
+import axios from 'axios'
 export default {
-    props: {
-        prop: {}
+    data () {
+        return {
+            form: {
+                body: null
+            }
+        }
     },
 
     methods: {
-        
+        async submit () {
+            await axios.post('/api/tweets', this.form)
+            this.form.body = null
+        }
     },
     
     mounted() {

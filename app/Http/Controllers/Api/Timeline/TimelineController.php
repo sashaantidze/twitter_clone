@@ -8,9 +8,22 @@ use Illuminate\Http\Request;
 
 class TimelineController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
+
     public function index (Request $request)
     {
-        $tweets = $request->user()->tweetsFromFollowing()->orderBy('id', 'DESC')->paginate(8);
+        $tweets = $request->user()
+            ->tweetsFromFollowing()
+            ->latest()
+            ->with([
+                'user'
+            ])
+            ->paginate(8);
 
         return new TweetCollection($tweets);
     }

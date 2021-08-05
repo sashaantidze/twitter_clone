@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
+Route::post('/tweets', 'App\Http\Controllers\Api\Tweets\TweetController@store');
