@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <div class="border-b-8 border-gray-800 p-4">
+            <div class="text-center text-white text-lg">{{$user.name}}</div>
             <app-tweet-compose/>
         </div>
 

@@ -3922,6 +3922,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -51209,7 +51210,13 @@ var render = function() {
       _c(
         "div",
         { staticClass: "border-b-8 border-gray-800 p-4" },
-        [_c("app-tweet-compose")],
+        [
+          _c("div", { staticClass: "text-center text-white text-lg" }, [
+            _vm._v(_vm._s(_vm.$user.name))
+          ]),
+          _vm._v(" "),
+          _c("app-tweet-compose")
+        ],
         1
       ),
       _vm._v(" "),
