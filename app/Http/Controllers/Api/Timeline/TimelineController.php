@@ -19,9 +19,11 @@ class TimelineController extends Controller
     {
         $tweets = $request->user()
             ->tweetsFromFollowing()
-            ->orderBy('created_at', 'DESC')
+            ->latest()
             ->with([
-                'user'
+                'user',
+                'likes',
+                'originalTweet'
             ])
             ->paginate(8);
 

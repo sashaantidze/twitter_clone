@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
 Route::post('/tweets', 'App\Http\Controllers\Api\Tweets\TweetController@store');
+Route::post('/tweets/{tweet}/likes', 'App\Http\Controllers\Api\Tweets\TweetLikeController@store');
+Route::delete('/tweets/{tweet}/likes', 'App\Http\Controllers\Api\Tweets\TweetLikeController@destroy');

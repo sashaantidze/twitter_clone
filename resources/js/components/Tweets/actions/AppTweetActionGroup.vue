@@ -1,0 +1,43 @@
+<template>
+    <ul class="flex mt-4">
+
+        <li class="w-3/12">
+            <app-tweet-reply-action />
+        </li>
+        
+        <li class="w-3/12">
+            <app-tweet-retweet-action />
+        </li>
+
+        <li class="w-3/12">
+            <app-tweet-like-action :tweet="tweet" />
+        </li>
+
+
+
+    </ul>
+</template>
+
+<script>
+
+export default {
+    data () {
+        return {}
+    },
+
+    props: {
+        tweet: {
+            required: true,
+            type: Object
+        }
+    },
+
+    methods: {
+        
+    },
+    
+    mounted() {
+        
+    }
+}
+</script>
