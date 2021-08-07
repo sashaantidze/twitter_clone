@@ -1,0 +1,41 @@
+<template>
+    <div>
+    	
+    	<div class="text-gray-600 font-medium text-sm flex items-center mb-2">
+    		<svg class="fill-current text-gray-600 w-3 mr-2" height="24" viewBox="0 -26 512 512" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m480 293.824219c0 26.511719-21.492188 48-48 48h-377.375l63.199219-63.199219-22.625-22.625-90.511719 90.511719c-6.246094 6.25-6.246094 16.378906 0 22.625l90.511719 90.511719 22.625-22.625-63.199219-63.199219h377.375c44.160156-.050781 79.945312-35.839844 80-80v-64h-32zm0 0"/><path d="m32 165.824219c0-26.507813 21.492188-48 48-48h377.375l-63.199219 63.199219 22.625 22.625 90.511719-90.511719c6.246094-6.25 6.246094-16.375 0-22.625l-90.511719-90.511719-22.625 22.625 63.199219 63.199219h-377.375c-44.160156.054687-79.9453125 35.839843-80 80v64h32zm0 0"/></svg>
+	        <span>{{tweet.user.name}} retweeted</span>
+	    </div>
+
+
+	    <component
+	        :is="`app-tweet-variant-${tweet.original_tweet.type}`"
+	        :tweet="tweet.original_tweet"
+	        />
+
+    </div>
+
+</template>
+
+<script>
+
+export default {
+    data () {
+        return {}
+    },
+
+    props: {
+        tweet: {
+            required: true,
+            type: Object
+        }
+    },
+
+    methods: {
+        
+    },
+    
+    mounted() {
+        
+    }
+}
+</script>

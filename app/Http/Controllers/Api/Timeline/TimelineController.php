@@ -19,7 +19,7 @@ class TimelineController extends Controller
     {
         $tweets = $request->user()
             ->tweetsFromFollowing()
-            ->latest()
+            ->orderBy('created_at', 'DESC')
             ->with([
                 'user'
             ])

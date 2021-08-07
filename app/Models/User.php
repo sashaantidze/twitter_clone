@@ -47,7 +47,8 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return 'https://www.gravatar.com/avatar/' . md5($this->email) . '?d=mp';
+        return $this->id != 1 ? 'https://www.gravatar.com/avatar/' . md5($this->email) . '?d=mp'
+            : 'https://lh3.googleusercontent.com/ogw/ADea4I4fkzIpLC8XoQ8MElkjyzCET6GIZT3ab3g5m3SgsA=s83-c-mo';
     }
 
 
