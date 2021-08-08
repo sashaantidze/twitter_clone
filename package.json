@@ -32,6 +32,7 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "vue-click-outside": "^1.1.0",
         "vue-observe-visibility": "^1.0.0",
         "vuex": "^3.6.2"
     }

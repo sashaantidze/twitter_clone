@@ -26,5 +26,7 @@ class TweetLikeController extends Controller
     public function destroy(Request $request, Tweet $tweet)
     {
         $request->user()->likes->where('tweet_id', $tweet->id)->first()->delete();
+
+        broadcast(new TweetLikesWereUpdated($request->user(), $tweet));
     }
 }
