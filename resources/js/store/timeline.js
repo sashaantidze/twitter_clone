@@ -50,6 +50,7 @@ export default {
 			console.log(response.data.meta.likes)
 
 			commit('likes/PUSH_LIKES', response.data.meta.likes, {root: true})
+			commit('retweets/PUSH_RETWEETS', response.data.meta.retweets, {root: true})
 
 			return response
 		}

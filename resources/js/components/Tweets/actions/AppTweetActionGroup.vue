@@ -6,7 +6,7 @@
         </li>
         
         <li class="w-3/12">
-            <app-tweet-retweet-action />
+            <app-tweet-retweet-action :tweet="tweet" />
         </li>
 
         <li class="w-3/12">
