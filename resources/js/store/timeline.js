@@ -25,6 +25,12 @@ export default {
 			)
 		},
 
+		POP_TWEET (state, id) {
+			state.tweets = state.tweets.filter((t) => {
+				return t.id !== id
+			})
+		},
+
 		SET_LIKES (state, {id, count}) {
 			state.tweets = state.tweets.map((t) => {
 				if(t.id === id) {
@@ -60,8 +66,6 @@ export default {
 			let response = await axios.get(url)
 
 			commit('PUSH_TWEETS', response.data.data)
-
-			console.log(response.data.meta.likes)
 
 			commit('likes/PUSH_LIKES', response.data.meta.likes, {root: true})
 			commit('retweets/PUSH_RETWEETS', response.data.meta.retweets, {root: true})

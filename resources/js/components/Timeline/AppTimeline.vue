@@ -46,7 +46,6 @@ export default {
             }
 
             if(this.lastPage === this.page){
-                console.log('last page')
                 return
             }
 

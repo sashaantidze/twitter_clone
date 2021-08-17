@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Tweets;
 
 use App\Events\Tweets\TweetRetweetsWereUpdated;
 use App\Events\Tweets\TweetWasCreated;
+use App\Events\Tweets\TweetWasDeleted;
 use App\Http\Controllers\Controller;
 use App\Models\Tweet;
 use App\Tweets\TweetType;
@@ -23,8 +24,12 @@ class TweetRetweetController extends Controller
     }
 
 
-    public function destroy(Request $request, Tweet $tweet)
-    {
+    public function destroy(Request $request, Tweet $tweet){
+        $retweet = $tweet->retweetedTweet()->where('user_id', $request->user()->id)->get();
+        $collection = collect($retweet)->first();
+
+        broadcast(new TweetWasDeleted($collection));
         $tweet->retweetedTweet()->where('user_id', $request->user()->id)->delete();
+        broadcast(new TweetRetweetsWereUpdated($request->user(), $tweet));
     }
 }
