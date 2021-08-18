@@ -12,9 +12,15 @@
     		<app-tweet-compose-textarea v-model="form.body" />
 
     		<div class="flex justify-between">
-    			<div>
-    				actions
-    			</div>
+
+
+    			<ul class="flex items-center">
+                    <li class="mr-4">
+                        <app-tweet-compose-media-button id="media-compose" @selected="handleMediaSelected" />
+                    </li>
+    			</ul>
+
+
 
     			<div class="flex items-center justify-end">
                     <div>
@@ -37,7 +43,13 @@ export default {
     data () {
         return {
             form: {
-                body: ''
+                body: '',
+                media: []
+            },
+
+            media: {
+                image: [],
+                video: null
             }
         }
     },
@@ -45,7 +57,11 @@ export default {
     methods: {
         async submit () {
             await axios.post('/api/tweets', this.form)
-            this.form.body = null
+            this.form.body = ''
+        },
+
+        handleMediaSelected (files) {
+            console.log(files)
         }
     },
     

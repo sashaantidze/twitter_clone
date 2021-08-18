@@ -21,9 +21,6 @@
     
 		</svg>
 
-        <div class="text-white">
-            {{displayPercentage}}
-        </div>
 
     </div>
 
