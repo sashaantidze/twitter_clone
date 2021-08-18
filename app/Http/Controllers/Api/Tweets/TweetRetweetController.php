@@ -24,7 +24,9 @@ class TweetRetweetController extends Controller
     }
 
 
-    public function destroy(Request $request, Tweet $tweet){
+    public function destroy(Request $request, Tweet $tweet)
+    {
+        
         $retweet = $tweet->retweetedTweet()->where('user_id', $request->user()->id)->get();
         $collection = collect($retweet)->first();
 
