@@ -12,7 +12,7 @@ class MediaTypesController extends Controller
     {
         return response()->json([
             'data' => [
-                'image' => MimeTypes::$image,
+                'images' => MimeTypes::$image,
                 'video' => MimeTypes::$video,
             ]
         ]);

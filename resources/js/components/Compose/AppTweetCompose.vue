@@ -1,16 +1,26 @@
 <template>
     <form class="flex" @submit.prevent="submit">
         
-    	<div class="mr-3">
-
-    		<img :src="$user.avatar" class="w-12 rounded-full" alt="">
+    	
+		<img :src="$user.avatar" class="w-12 h-12 mr-3 rounded-full" alt="">
     		
-    	</div>
 
     	<div class="flex-grow">
 
     		<app-tweet-compose-textarea v-model="form.body" />
-            <span class="text-gray-300">{{media}}</span>
+
+            <app-tweet-image-preview
+            :images="media.images"
+            v-if="media.images.length"
+            @removed="removeImage"
+             />
+
+             <app-tweet-video-preview
+            :video="media.video"
+            v-if="media.video"
+            @removed="removeVideo(media.video)"
+             />
+
     		<div class="flex justify-between">
 
 
@@ -48,7 +58,7 @@ export default {
             },
 
             media: {
-                image: [],
+                images: [],
                 video: null
             },
 
@@ -72,8 +82,8 @@ export default {
 
         handleMediaSelected (files) {
             Array.from(files).slice(0,4).forEach((file) => {
-                if(this.mediaTypes.image.includes(file.type)) {
-                    this.media.image.push(file)
+                if(this.mediaTypes.images.includes(file.type)) {
+                    this.media.images.push(file)
                 }
 
                 if(this.mediaTypes.video.includes(file.type)){
@@ -82,8 +92,21 @@ export default {
 
 
                 if(this.media.video){
-                    this.media.image = []
+                    this.media.images = []
                 }
+            })
+        },
+
+
+        removeVideo(video) {
+            console.log(video.name + ' - removed')
+            this.media.video = null
+        },
+
+
+        removeImage(image) {
+            this.media.images = this.media.images.filter((img) => {
+                return image !== img
             })
         }
     },
