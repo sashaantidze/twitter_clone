@@ -21,3 +21,5 @@ Route::delete('/tweets/{tweet}/likes', 'App\Http\Controllers\Api\Tweets\TweetLik
 
 Route::post('/tweets/{tweet}/retweets', 'App\Http\Controllers\Api\Tweets\TweetRetweetController@store');
 Route::delete('/tweets/{tweet}/retweets', 'App\Http\Controllers\Api\Tweets\TweetRetweetController@destroy');
+
+Route::get('/media/types', 'App\Http\Controllers\Api\Media\MediaTypesController@index');

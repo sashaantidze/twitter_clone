@@ -3874,7 +3874,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       media: {
         image: [],
         video: null
-      }
+      },
+      mediaTypes: {}
     };
   },
   methods: {
@@ -3900,11 +3901,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    getMediaTypes: function getMediaTypes() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/media/types');
+
+              case 2:
+                response = _context2.sent;
+                _this2.mediaTypes = response.data.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     handleMediaSelected: function handleMediaSelected(files) {
-      console.log(files);
+      var _this3 = this;
+
+      Array.from(files).slice(0, 4).forEach(function (file) {
+        if (_this3.mediaTypes.image.includes(file.type)) {
+          _this3.media.image.push(file);
+        }
+
+        if (_this3.mediaTypes.video.includes(file.type)) {
+          _this3.media.video = file;
+        }
+
+        if (_this3.media.video) {
+          _this3.media.image = [];
+        }
+      });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.getMediaTypes();
+  }
 });
 
 /***/ }),
@@ -53099,6 +53140,10 @@ var render = function() {
               expression: "form.body"
             }
           }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-gray-300" }, [
+            _vm._v(_vm._s(_vm.media))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex justify-between" }, [
             _c("ul", { staticClass: "flex items-center" }, [
