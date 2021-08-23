@@ -14,6 +14,11 @@
                     </div>
                 </div>
 
+
+                <div class="mt-4 mb-4" v-if="video">
+                    <video :src="video.url" controls muted class="rounded-lg"></video>
+                </div>
+
                 <app-tweet-action-group :tweet="tweet"/>
 
             </div>
@@ -42,6 +47,10 @@ export default {
     computed: {
         images() {
             return this.tweet.media.data.filter(m => m.type === 'image')
+        },
+
+        video() {
+            return this.tweet.media.data.filter(m => m.type === 'video')[0]
         }
     }
 }
