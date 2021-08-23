@@ -70,9 +70,47 @@ export default {
 
     methods: {
         async submit () {
-            await axios.post('/api/tweets', this.form)
-            this.form.body = ''
+
+            let media = await this.uploadMedia()
+            this.form.media = media.data.data.map(r => r.id)
+
+            console.log(this.form)
+
+
+            // await axios.post('/api/tweets', this.form)
+            // this.form.body = ''
         },
+
+
+        async uploadMedia () {
+            return await axios.post('/api/media', this.buildMediaForm(), {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        },
+
+
+        buildMediaForm () {
+            let form = new FormData()
+
+            if(this.media.images.length) {
+                this.media.images.forEach((image, index) => {
+                    form.append(`media[${index}]`, image)
+                })
+            }
+
+
+            if(this.media.video) {
+                form.append(`media[0]`, this.media.video)
+            }
+
+            return form
+        },
+
+
+
+
 
         async getMediaTypes () {
             let response = await axios.get('/api/media/types')

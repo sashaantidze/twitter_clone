@@ -23,3 +23,4 @@ Route::post('/tweets/{tweet}/retweets', 'App\Http\Controllers\Api\Tweets\TweetRe
 Route::delete('/tweets/{tweet}/retweets', 'App\Http\Controllers\Api\Tweets\TweetRetweetController@destroy');
 
 Route::get('/media/types', 'App\Http\Controllers\Api\Media\MediaTypesController@index');
+Route::post('/media', 'App\Http\Controllers\Api\Media\MediaController@store');

@@ -3893,17 +3893,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var media;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/tweets', _this.form);
+                return _this.uploadMedia();
 
               case 2:
-                _this.form.body = '';
+                media = _context.sent;
+                _this.form.media = media.data.data.map(function (r) {
+                  return r.id;
+                });
+                console.log(_this.form); // await axios.post('/api/tweets', this.form)
+                // this.form.body = ''
 
-              case 3:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -3911,23 +3917,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    getMediaTypes: function getMediaTypes() {
+    uploadMedia: function uploadMedia() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/media/types');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/media', _this2.buildMediaForm(), {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                });
 
               case 2:
-                response = _context2.sent;
-                _this2.mediaTypes = response.data.data;
+                return _context2.abrupt("return", _context2.sent);
 
-              case 4:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -3935,20 +3943,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    handleMediaSelected: function handleMediaSelected(files) {
+    buildMediaForm: function buildMediaForm() {
+      var form = new FormData();
+
+      if (this.media.images.length) {
+        this.media.images.forEach(function (image, index) {
+          form.append("media[".concat(index, "]"), image);
+        });
+      }
+
+      if (this.media.video) {
+        form.append("media[0]", this.media.video);
+      }
+
+      return form;
+    },
+    getMediaTypes: function getMediaTypes() {
       var _this3 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/media/types');
+
+              case 2:
+                response = _context3.sent;
+                _this3.mediaTypes = response.data.data;
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    handleMediaSelected: function handleMediaSelected(files) {
+      var _this4 = this;
+
       Array.from(files).slice(0, 4).forEach(function (file) {
-        if (_this3.mediaTypes.images.includes(file.type)) {
-          _this3.media.images.push(file);
+        if (_this4.mediaTypes.images.includes(file.type)) {
+          _this4.media.images.push(file);
         }
 
-        if (_this3.mediaTypes.video.includes(file.type)) {
-          _this3.media.video = file;
+        if (_this4.mediaTypes.video.includes(file.type)) {
+          _this4.media.video = file;
         }
 
-        if (_this3.media.video) {
-          _this3.media.images = [];
+        if (_this4.media.video) {
+          _this4.media.images = [];
         }
       });
     },
