@@ -138,7 +138,6 @@ export default {
 
 
         removeVideo(video) {
-            console.log(video.name + ' - removed')
             this.media.video = null
         },
 
