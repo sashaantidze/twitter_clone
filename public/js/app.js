@@ -4745,6 +4745,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -54630,7 +54632,10 @@ var render = function() {
                 return _vm.retweetOrUnretweet.apply(null, arguments)
               }
             }
-          })
+          }),
+      _vm._v(
+        "\n\n      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat consequatur culpa sed cum repudiandae aspernatur, et dolorum ullam vel voluptas iusto doloribus libero veritatis voluptatibus sit quas amet laudantium fugit.\n\n  "
+      )
     ],
     1
   )
