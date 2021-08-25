@@ -9,6 +9,8 @@
 
     		<app-tweet-compose-textarea v-model="form.body" />
 
+            <app-tweet-media-progress class="mb-4" :progress="media.progress" v-if="media.progress" />
+
             <app-tweet-image-preview
             :images="media.images"
             v-if="media.images.length"
@@ -29,7 +31,6 @@
                         <app-tweet-compose-media-button id="media-compose" @selected="handleMediaSelected" />
                     </li>
     			</ul>
-
 
 
     			<div class="flex items-center justify-end">
@@ -54,25 +55,26 @@ export default {
         return {
             form: {
                 body: '',
-                media: []
+                media: [],
             },
 
             media: {
                 images: [],
-                video: null
+                video: null,
+                progress: 0
             },
 
-            mediaTypes: {
-
-            }
+            mediaTypes: {}
         }
     },
 
     methods: {
         async submit () {
 
-            let media = await this.uploadMedia()
-            this.form.media = media.data.data.map(r => r.id)
+            if(this.media.images.length || this.media.video){
+                let media = await this.uploadMedia()
+                this.form.media = media.data.data.map(r => r.id)
+            }
 
             await axios.post('/api/tweets', this.form)
             
@@ -80,6 +82,14 @@ export default {
             this.form.media = []
             this.media.images = []
             this.media.video = null
+            this.media.progress = 0
+        },
+
+        handleUploadProgress (event) {
+            let total = event.total
+            let current = event.loaded
+
+            this.media.progress = parseInt(Math.round((current / total) * 100))
         },
 
 
@@ -87,7 +97,8 @@ export default {
             return await axios.post('/api/media', this.buildMediaForm(), {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+                onUploadProgress: this.handleUploadProgress
             })
         },
 
