@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin')
 
 module.exports = {
     purge: [
@@ -27,8 +28,25 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            textColor: ['responsive', 'hover', 'focus', 'important'],
+            backgroundColor: ['responsive', 'hover', 'focus', 'important'],
         },
+        
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        require('@tailwindcss/forms'),
+
+        plugin(function({ addVariant }) {
+          addVariant('important', ({ container }) => {
+            container.walkRules(rule => {
+              rule.selector = `.\\!${rule.selector.slice(1)}`
+              rule.walkDecls(decl => {
+                decl.important = true
+              })
+            })
+          })
+        })
+
+    ],
 };

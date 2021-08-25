@@ -12,7 +12,8 @@
                 Retweet
             </app-dropdown-item>
 
-            <app-dropdown-item>
+            <app-dropdown-item @click.prevent="$modal.show(AppTweetRetweetModal,{ text: '' },
+  { draggable: true })">
                 Retweet with comment
             </app-dropdown-item>
 
@@ -26,11 +27,12 @@
 
     </div>
 
-    
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import AppTweetRetweetModal from '../../modals/AppTweetRetweetModal'
+
 export default {
 
     props: {
@@ -40,10 +42,12 @@ export default {
         }
     },
 
-
-    methods: {
-
+    data () {
+        return {
+            AppTweetRetweetModal
+        }
     },
+
 
     computed: {
         ...mapGetters({
