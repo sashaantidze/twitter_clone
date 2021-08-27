@@ -1,6 +1,5 @@
 <template>
     
-
     <div>
         <app-dropdown v-if="!retweeted">
 
@@ -12,8 +11,7 @@
                 Retweet
             </app-dropdown-item>
 
-            <app-dropdown-item @click.prevent="$modal.show(AppTweetRetweetModal,{ text: '' },
-  { draggable: true })">
+            <app-dropdown-item @click.prevent="$modal.show(AppTweetRetweetModal,{ tweet: tweet },{ draggable: true })">
                 Retweet with comment
             </app-dropdown-item>
 
@@ -24,8 +22,6 @@
         :tweet="tweet"
         @click.prevent="retweetOrUnretweet"
         />
-
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat consequatur culpa sed cum repudiandae aspernatur, et dolorum ullam vel voluptas iusto doloribus libero veritatis voluptatibus sit quas amet laudantium fugit.
 
     </div>
 

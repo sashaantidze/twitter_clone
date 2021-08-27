@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <textarea class="bg-gray-900 w-full outline-none text-gray-300 text-lg resize-none mb-2" placeholder="What's cracking, my dude?" autofocus @input="$emit('input', $event.target.value); resize($event)" :value="value"></textarea>
+        <textarea class="bg-gray-900 w-full outline-none text-gray-300 text-lg resize-none mb-2" :placeholder="placeholder" autofocus @input="$emit('input', $event.target.value); resize($event)" :value="value"></textarea>
     </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
     props: {
         value: {
         	required: false
+        },
+
+        placeholder: {
+            required: false,
+            type: String
         }
     },
 

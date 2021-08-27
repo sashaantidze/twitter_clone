@@ -1,6 +1,13 @@
 <template>
     <div class="">
-        content
+    	<app-tweet-retweet-compose/>
+
+        <component
+        class="border border-gray-700 rounded-lg mt-4 p-4"
+        v-if="tweet"
+        :is="`app-tweet-variant-${tweet.type}`"
+        :tweet="tweet">
+        </component>
     </div>
 </template>
 
@@ -12,7 +19,10 @@ export default {
     },
 
     props: {
-        prop: {}
+        tweet: {
+        	required: true,
+        	type: Object
+        }
     },
 
     methods: {
