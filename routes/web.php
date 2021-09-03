@@ -24,6 +24,7 @@ Route::get('/home', function (Request $request) {
     return view('home');
 })->middleware(['auth:sanctum'])->name('home');
 
-Route::get('/api/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
+Route::get('/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
+Route::get('/notifications', 'App\Http\Controllers\Notifications\NotificationController@index');
 
 require __DIR__.'/auth.php';
