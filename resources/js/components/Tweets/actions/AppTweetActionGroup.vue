@@ -2,7 +2,7 @@
     <ul class="flex mt-4">
 
         <li class="w-3/12">
-            <app-tweet-reply-action />
+            <app-tweet-reply-action :tweet="tweet" />
         </li>
         
         <li class="w-3/12">

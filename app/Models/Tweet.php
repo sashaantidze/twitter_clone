@@ -8,6 +8,7 @@ use App\Models\TweetMedia;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Tweet extends Model
 {
@@ -20,6 +21,12 @@ class Tweet extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+
+    public function scopeParent(Builder $builder)
+    {
+        return $builder->whereNull('parent_id');
     }
 
 
@@ -50,6 +57,12 @@ class Tweet extends Model
     public function media()
     {
         return $this->hasMany(TweetMedia::class);
+    }
+
+
+    public function replies()
+    {
+        return $this->hasMany(Tweet::class, 'parent_id');
     }
 
 }
