@@ -57,15 +57,15 @@ class TimelineController extends Controller
         //dump(array_diff($follower_ids, $followed_back));
 
 
-
-        $followers = auth()->user()->followers()->pluck('users.id')->toArray();
+        //COMPARE EITHER COLLECTIONS OR ARRAYS, YOU DECIDE! DON'T USE CODE ABOVE, IT'S CRAP. DON'T REMOVE YET THO
+        $followers = auth()->user()->followers;
         dump($followers);
 
-        $following = auth()->user()->following()->pluck('users.id')->toArray();
+        $following = auth()->user()->following;
         dump($following);
 
 
-
-        dump(array_diff($followers, $following));
+        dump($followers->diff($following));
+        //dump(array_diff($followers, $following));
     }
 }
