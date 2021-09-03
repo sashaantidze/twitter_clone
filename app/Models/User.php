@@ -65,6 +65,18 @@ class User extends Authenticatable
     }
 
 
+    public function isFollowing($ids)
+    {
+        return $this->following()->whereIn('following_id', $ids)->get();
+    }
+
+
+    public function isFollowedBy($ids)
+    {
+        return $this->followers()->whereIn('user_id', $ids)->get();
+    }
+
+
     public function followers()
     {
         return $this->belongsToMany(

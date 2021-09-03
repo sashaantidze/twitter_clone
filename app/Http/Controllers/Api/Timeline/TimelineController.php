@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Timeline;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TweetCollection;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TimelineController extends Controller
@@ -17,6 +18,8 @@ class TimelineController extends Controller
 
     public function index (Request $request)
     {
+        $this->tests();
+
         $tweets = $request->user()
             ->tweetsFromFollowing()
             ->parent()
@@ -36,5 +39,33 @@ class TimelineController extends Controller
             ->paginate(8);
 
         return new TweetCollection($tweets);
+    }
+
+
+    protected function tests()
+    {
+
+        // GET GIVEN USERS FOLLOWERS 
+        //$follower_ids = auth()->user()->followers()->pluck('users.id')->toArray();
+        //dump($follower_ids);
+
+        // GET USERS FROM FOLLOWERS THAT GIVEN USER IS FOLLOWING BACK
+        //$followed_back = auth()->user()->isFollowing($follower_ids)->pluck('id')->toArray();
+        //dump($followed_back);
+
+        // GET USERS THAT ARE NOT BEING FOLLOWED BACK (follow requests list)
+        //dump(array_diff($follower_ids, $followed_back));
+
+
+
+        $followers = auth()->user()->followers()->pluck('users.id')->toArray();
+        dump($followers);
+
+        $following = auth()->user()->following()->pluck('users.id')->toArray();
+        dump($following);
+
+
+
+        dump(array_diff($followers, $following));
     }
 }
