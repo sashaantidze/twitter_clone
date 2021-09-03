@@ -28,3 +28,5 @@ Route::post('/tweets/{tweet}/quotes', 'App\Http\Controllers\Api\Tweets\TweetQuot
 
 Route::get('/media/types', 'App\Http\Controllers\Api\Media\MediaTypesController@index');
 Route::post('/media', 'App\Http\Controllers\Api\Media\MediaController@store');
+
+

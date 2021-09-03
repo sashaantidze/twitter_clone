@@ -26,5 +26,6 @@ Route::get('/home', function (Request $request) {
 
 Route::get('/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
 Route::get('/notifications', 'App\Http\Controllers\Notifications\NotificationController@index');
+Route::get('/api/notifications', 'App\Http\Controllers\Api\Notifications\NotificationController@index');
 
 require __DIR__.'/auth.php';
