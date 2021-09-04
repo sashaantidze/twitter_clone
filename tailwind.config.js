@@ -30,6 +30,7 @@ module.exports = {
             opacity: ['disabled'],
             textColor: ['responsive', 'hover', 'focus', 'important'],
             backgroundColor: ['responsive', 'hover', 'focus', 'important'],
+            borderWidth: ['responsive', 'important'],
         },
         
     },

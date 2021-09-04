@@ -18,8 +18,8 @@ class TimelineController extends Controller
 
     public function index (Request $request)
     {
-        $this->tests();
-
+        // $this->tests();
+        
         $tweets = $request->user()
             ->tweetsFromFollowing()
             ->parent()
@@ -58,13 +58,15 @@ class TimelineController extends Controller
 
 
         //COMPARE EITHER COLLECTIONS OR ARRAYS, YOU DECIDE! DON'T USE CODE ABOVE, IT'S CRAP. DON'T REMOVE YET THO
+
+
         $followers = auth()->user()->followers;
         dump($followers);
 
         $following = auth()->user()->following;
         dump($following);
 
-
+        // (follow requests list)
         dump($followers->diff($following));
         //dump(array_diff($followers, $following));
     }

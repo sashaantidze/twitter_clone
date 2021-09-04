@@ -54,7 +54,6 @@ class TweetLiked extends Notification
         return [
             'user' => new UserResource($this->user),
             'tweet' => new TweetResource($this->tweet),
-
         ];
     }
 }
