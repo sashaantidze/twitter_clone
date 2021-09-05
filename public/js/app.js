@@ -5343,6 +5343,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -56651,7 +56652,9 @@ var render = function() {
           _c("app-tweet-username", {
             attrs: { user: _vm.notification.data.user }
           }),
-          _vm._v(" Replid to your tweet\n\t\t")
+          _vm._v(" Replid to your tweet\n\t\t"),
+          _vm._v(" "),
+          _c("div", [_vm._v(_vm._s(_vm.notification.id))])
         ],
         1
       ),
