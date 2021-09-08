@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Entity;
 use App\Models\Like;
 use App\Models\Tweet;
 use App\Models\TweetMedia;
 use App\Models\User;
+use App\Tweets\Entities\EntityExtractor;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class Tweet extends Model
 {
@@ -17,6 +19,17 @@ class Tweet extends Model
     //protected $fillable = ['body'];
 
     protected $guarded = null;
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Tweet $tweet) {
+            $tweet->entities()->createMany(
+                (new EntityExtractor($tweet->body))->getHashtagEntities()
+            );
+        });
+    } 
 
     public function user()
     {
@@ -63,6 +76,12 @@ class Tweet extends Model
     public function replies()
     {
         return $this->hasMany(Tweet::class, 'parent_id');
+    }
+
+
+    public function entities()
+    {
+        return $this->hasMany(Entity::class);
     }
 
 }

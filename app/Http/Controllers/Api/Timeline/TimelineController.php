@@ -60,14 +60,13 @@ class TimelineController extends Controller
         //COMPARE EITHER COLLECTIONS OR ARRAYS, YOU DECIDE! DON'T USE CODE ABOVE, IT'S CRAP. DON'T REMOVE YET THO
 
 
-        $followers = auth()->user()->followers;
+        $followers = auth()->user()->followers()->pluck('users.id');
         dump($followers);
 
-        $following = auth()->user()->following;
+        $following = auth()->user()->following()->pluck('users.id');
         dump($following);
 
         // (follow requests list)
         dump($followers->diff($following));
-        //dump(array_diff($followers, $following));
     }
 }
