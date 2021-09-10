@@ -8,6 +8,7 @@ use App\Models\Tweet;
 use App\Models\TweetMedia;
 use App\Models\User;
 use App\Tweets\Entities\EntityExtractor;
+use App\Tweets\Entities\EntityType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,7 @@ class Tweet extends Model
 
         static::created(function (Tweet $tweet) {
             $tweet->entities()->createMany(
-                (new EntityExtractor($tweet->body))->getHashtagEntities()
+                (new EntityExtractor($tweet->body))->getAllEntities()
             );
         });
     } 
@@ -82,6 +83,12 @@ class Tweet extends Model
     public function entities()
     {
         return $this->hasMany(Entity::class);
+    }
+
+
+    public function mentions()
+    {
+        return $this->hasMany(Entity::class)->whereType(EntityType::MENTION);
     }
 
 }
