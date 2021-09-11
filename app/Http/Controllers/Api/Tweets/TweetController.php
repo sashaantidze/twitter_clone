@@ -50,8 +50,6 @@ class TweetController extends Controller
         }
 
 
-        dd($tweet->mentions->users());
-
         broadcast(new TweetWasCreated($tweet));
     }
 }
