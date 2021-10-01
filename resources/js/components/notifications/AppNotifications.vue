@@ -1,5 +1,6 @@
 <template>
     <div class="">
+
         <div class="text-3xl text-white">Notifications</div>
 
         <app-notification v-for="notification in notifications" :key="notification.id" :notification="notification" />

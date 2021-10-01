@@ -25,6 +25,7 @@ Route::get('/home', function (Request $request) {
 })->middleware(['auth:sanctum'])->name('home');
 
 Route::get('/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
+Route::get('/tweets/{tweet}', 'App\Http\Controllers\Tweets\TweetController@show')->name('tweets.show');
 Route::get('/notifications', 'App\Http\Controllers\Notifications\NotificationController@index');
 Route::get('/api/notifications', 'App\Http\Controllers\Api\Notifications\NotificationController@index');
 

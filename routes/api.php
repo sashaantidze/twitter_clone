@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/timeline', 'App\Http\Controllers\Api\Timeline\TimelineController@index');
 Route::get('/media/types', 'App\Http\Controllers\Api\Media\MediaTypesController@index');
 Route::get('/tweets', 'App\Http\Controllers\Api\Tweets\TweetController@index');
+Route::get('/tweets/{tweet}', 'App\Http\Controllers\Api\Tweets\TweetController@show');
+Route::get('/tweets/{tweet}/replies', 'App\Http\Controllers\Api\Tweets\TweetReplyController@show');
 
 Route::post('/tweets', 'App\Http\Controllers\Api\Tweets\TweetController@store');
 Route::post('/tweets/{tweet}/likes', 'App\Http\Controllers\Api\Tweets\TweetLikeController@store');

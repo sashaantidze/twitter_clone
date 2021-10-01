@@ -4,7 +4,6 @@
     	<div class="text-gray-300 mb-4">
     		<app-tweet-username :user="notification.data.user" /> Replid to your tweet
     		<!-- <p class="text-gray-600">{{notification.data.tweet.body}}</p> -->
-    		<div>{{notification.id}}</div>
         </div>
 
 
