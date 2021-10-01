@@ -5176,6 +5176,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -5641,6 +5646,7 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
 
   store.commit('timeline/SET_LIKES', e);
   store.commit('notifications/SET_LIKES', e);
+  store.commit('conversation/SET_LIKES', e);
 }).listen('.TweetRetweetsWereUpdated', function (e) {
   if (e.user_id === User.id) {
     store.dispatch('retweets/syncRetweet', e.id);
@@ -5648,11 +5654,13 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
 
   store.commit('timeline/SET_RETWEETS', e);
   store.commit('notifications/SET_RETWEETS', e);
+  store.commit('conversation/SET_RETWEETS', e);
 }).listen('.TweetWasDeleted', function (e) {
   store.commit('timeline/POP_TWEET', e.id);
 }).listen('.TweetRepliesWereUpdated', function (e) {
   store.commit('timeline/SET_REPLIES', e);
   store.commit('notifications/SET_REPLIES', e);
+  store.commit('conversation/SET_REPLIES', e);
 });
 
 /***/ }),
@@ -57062,6 +57070,15 @@ var render = function() {
         [
           _c("app-tweet-username", { attrs: { user: _vm.tweet.user } }),
           _vm._v(" "),
+          _vm.tweet.replying_to
+            ? _c("div", { staticClass: "text-gray-600 mb-2" }, [
+                _vm._v("\n                Replying to "),
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v("@" + _vm._s(_vm.tweet.replying_to))
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("app-tweet-body", { attrs: { tweet: _vm.tweet } }),
           _vm._v(" "),
           _vm.images.length
@@ -57135,7 +57152,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "text-lg border-b-8 border-t-8 border-gray-800" },
+      {
+        staticClass:
+          "text-lg border-b-8 border-t-8 bg-indigo-900 border-gray-800"
+      },
       [
         _vm.tweet(_vm.id)
           ? _c("app-tweet", { attrs: { tweet: _vm.tweet(_vm.id) } })
